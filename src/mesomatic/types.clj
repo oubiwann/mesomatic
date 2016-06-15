@@ -1115,6 +1115,16 @@
                     nil
                     nil))))
 
+(defrecord Operation [op-type]
+  Serializable
+  (data->pb [this]
+    (-> (Protos$Offer$Operation/newBuilder)
+        (.setType op-type))))
+
+(defmethod pb->data Protos$Offer$Operation
+  [^Protos$Offer$Operation op]
+  (Operation. (pb->data (.getType op))))
+
 ;; Ports
 ;; =====
 
