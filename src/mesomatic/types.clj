@@ -1115,11 +1115,10 @@
                     nil
                     nil))))
 
-(defrecord Operation [op-type]
+(defrecord Operation [type]
   Serializable
   (data->pb [this]
-    (-> (Protos$Offer$Operation/newBuilder)
-        (.setType op-type))))
+    (Protos$Offer$Operation/newBuilder type)))
 
 (defmethod pb->data Protos$Offer$Operation
   [^Protos$Offer$Operation op]
