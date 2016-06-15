@@ -72,8 +72,7 @@
            org.apache.mesos.Protos$DiscoveryInfo
            org.apache.mesos.Protos$DiscoveryInfo$Visibility
            org.apache.mesos.Protos$Label
-           org.apache.mesos.Protos$Labels
-           ))
+           org.apache.mesos.Protos$Labels))
 
 ;; Our two exported signatures: data->pb and pb->data
 
