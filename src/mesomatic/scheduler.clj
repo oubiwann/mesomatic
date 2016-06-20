@@ -15,20 +15,22 @@
   (error             [this driver message]))
 
 (defprotocol SchedulerDriver
-  (abort!                  [this])
-  (accept-offers           [this offer-ids operations]
-                           [this offer-ids operations filters])
-  (decline-offer           [this offer-id] [this offer-id filters])
-  (join!                   [this])
-  (kill-task!              [this task-id])
-  (launch-tasks!           [this offer-id tasks] [this offer-id tasks filters])
-  (reconcile-tasks         [this statuses])
-  (request-resources       [this requests])
-  (revive-offers           [this])
-  (run-driver!             [this])
-  (send-framework-message! [this executor-id slave-id data])
-  (start!                  [this])
-  (stop!                   [this] [this failover?]))
+  (abort!                    [this])
+  (accept-offers             [this offer-ids operations]
+                             [this offer-ids operations filters])
+  (acknowledge-status-update [this status])
+  (decline-offer             [this offer-id] [this offer-id filters])
+  (join!                     [this])
+  (kill-task!                [this task-id])
+  (launch-tasks!             [this offer-id tasks] [this offer-id tasks filters])
+  (reconcile-tasks           [this statuses])
+  (request-resources         [this requests])
+  (revive-offers             [this])
+  (run-driver!               [this])
+  (send-framework-message!   [this executor-id slave-id data])
+  (start!                    [this])
+  (stop!                     [this] [this failover?])
+  (suppress-offers           [this]))
 
 (defn wrap-driver [d]
   (reify SchedulerDriver
@@ -44,6 +46,8 @@
                                (mapv (partial ->pb :OfferID) offer-ids)
                                (mapv (partial ->pb :Operation) operations)
                                (mapv (partial ->pb :Filters) filters))))
+    (acknowledge-status-update [this status]
+      (pb->data (.acknowledgeStatusUpdate this (->pb :TaskStatus status))))
     (decline-offer [this offer-id]
       (pb->data (.declineOffer d (->pb :OfferID offer-id))))
     (decline-offer [this offer-id filters]
@@ -87,7 +91,9 @@
     (stop! [this]
       (pb->data (.stop d)))
     (stop! [this failover?]
-      (pb->data (.stop this (boolean failover?))))))
+      (pb->data (.stop this (boolean failover?))))
+    (suppress-offers [this]
+      (pb->data (.suppressOffers d)))))
 
 (defn wrap-scheduler
   [implementation]
