@@ -47,7 +47,7 @@
                                (mapv (partial ->pb :Operation) operations)
                                (mapv (partial ->pb :Filters) filters))))
     (acknowledge-status-update [this status]
-      (pb->data (.acknowledgeStatusUpdate this (->pb :TaskStatus status))))
+      (pb->data (.acknowledgeStatusUpdate d (->pb :TaskStatus status))))
     (decline-offer [this offer-id]
       (pb->data (.declineOffer d (->pb :OfferID offer-id))))
     (decline-offer [this offer-id filters]
