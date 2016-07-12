@@ -1,4 +1,4 @@
-(defproject clojusc/mesomatic "0.28.2-SNAPSHPOT"
+(defproject clojusc/mesomatic "0.28.2-SNAPSHOT"
   :description "Apache Mesos type conversions to and from Clojure (dev fork)"
   :url "https://github.com/clojusc/mesomatic"
   :license {:name "MIT License"}
