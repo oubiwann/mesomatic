@@ -1116,7 +1116,7 @@
                     nil
                     nil))))
 
-(defrecord Operation [type]
+(defrecord Operation [type tasks resources volumes]
   Serializable
   (data->pb [this]
     (case (:type this)
