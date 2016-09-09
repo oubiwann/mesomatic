@@ -1,7 +1,7 @@
 mesomatic: the cluster is a library
 ===================================
 
-[![Build Status](https://secure.travis-ci.org/pyr/mesomatic.png)](http://travis-ci.org/pyr/mesomatic)
+[![Build Status](https://secure.travis-ci.org/clojusc/mesomatic.png)](http://travis-ci.org/clojusc/mesomatic)
 
 Mesomatic provides facilities to interact with [Apache Mesos](http://mesos.apache.org)
 from clojure. It provides a simple and idiomatic facade around the Mesos JAVA API and
@@ -15,17 +15,21 @@ the patch release number, for instance version `0.28.0-r0` will target mesos `0.
 Add this to your leiningen profile.
 
 ```clojure
-:dependencies [[org.spootnik/mesomatic "0.28.0-r0"]]
+:dependencies [[clojusc/mesomatic "0.28.2-SNAPSHOT"]]
 ```
 
 If you want to use the [core.async](https://github.com/clojure/core.async) facade,
 you will need to pull it in as well:
 
 ```clojure
-:dependencies [[org.spootnik/mesomatic       "0.28.0-r0"]
-               [org.spootnik/mesomatic-async "0.28.0-r0"]]
+:dependencies [[clojusc/mesomatic "0.28.2-SNAPSHOT"]
+               [clojusc/mesomatic-async "0.28.2-SNAPSHOT"]]
 ```
-               
+
+Note that the Clojusc forks of @pyr's repo have a `deploy` branch with all the
+pending PRs merged into it. This `deploy` branch is what is used to publish to
+Clojars.
+
 ## Namespaces
 
 - `mesomatic.types`: contains a facade to and from all protobuf types.
